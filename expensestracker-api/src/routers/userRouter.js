@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { insertUser } from "../models/User.model.js";
+import { insertUser, findUser } from "../models/User.model.js";
 //get user
 router.get("/", (req, res) => {
   res.send("get user");
@@ -33,8 +33,24 @@ router.post("/", async (req, res) => {
   }
 });
 //login user
-router.post("/login", (req, res) => {
-  res.send("login user");
+router.post("/login", async (req, res) => {
+  try {
+    const user = await findUser(req.body);
+    //we use this method when we may receive some null, so it is called nulish operator
+    user?._id
+      ? res.json({ status: "success", user })
+      : res.json({
+          staus: "error",
+          message: "invalid login details",
+        });
+  } catch (error) {
+    console.log(error);
+
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 });
 
 export default router;
