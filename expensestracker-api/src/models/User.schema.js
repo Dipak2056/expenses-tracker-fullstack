@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minlength: [6, "password must be atleast 6 char long"],
+      minlength: [6, "password must be atleast 6 char long"], //this is how we give the custom error message
     },
   },
   {

@@ -1,6 +1,7 @@
 import UserSchema from "./User.schema.js";
 
-//create few function that does query about
+//create few function that does query on the basis of user schema
+
 //insert user
 export const insertUser = (obj) => {
   return UserSchema(obj).save();

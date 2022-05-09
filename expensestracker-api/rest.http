@@ -8,8 +8,8 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-    "name":"John Donvhgje",
-    "email":"jan@gmail.com",
+    "name":"John vanjey",
+    "email":"john@gmail.com",
     "password":"123456"
 }
 
@@ -19,7 +19,7 @@ POST http://localhost:8000/api/v1/users/login
 Content-Type: application/json
 
 {
-    "email":"jan@gmail.com",
+    "email":"joh@gmail.com",
     "password":"123456"
 }
 

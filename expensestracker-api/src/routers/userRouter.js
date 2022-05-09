@@ -1,8 +1,13 @@
+//these are core import from express
 import express from "express";
 const router = express.Router();
+
+//these are dependencies import from models
 import { insertUser, findUser } from "../models/User.model.js";
+
 //get user
 router.get("/", (req, res) => {
+  console.log(req.body);
   res.send("get user");
 });
 
@@ -11,7 +16,6 @@ router.post("/", async (req, res) => {
   try {
     console.log(req.body);
     const result = await insertUser(req.body);
-
     result?._id
       ? res.json({
           status: "success",
