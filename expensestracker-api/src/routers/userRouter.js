@@ -3,7 +3,7 @@ const router = express.Router();
 
 //get user
 router.get("/", (req, res) => {
-  res.send("login user");
+  res.send("get user");
   console.log(req.body);
 });
 
