@@ -13,9 +13,14 @@ app.use(morgan("tiny"));
 import { dbConnection } from "./src/config/db.js";
 dbConnection();
 
+//apis
+import userRouter from "./src/routers/userRouter.js";
+app.use("/api/v1/users", userRouter);
+
 //if no calls are made
 app.get("*", (req, res) => {
   res.status(404).send("<h1>404 Not Found</h1>");
+  console.log(req.body);
 });
 
 app.listen(PORT, (error) => {
