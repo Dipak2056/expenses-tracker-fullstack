@@ -4,17 +4,17 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 //setups middle wares
-import cors from "cors";
-import morgan from "morgan";
+import cors from "cors"; //to avoid cross origin reference
+import morgan from "morgan"; //to find where the data is flowing
 app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
 
-//db connection
+//db connection imported from db.js
 import { dbConnection } from "./src/config/db.js";
 dbConnection();
 
-//apis
+//apis end points
 import userRouter from "./src/routers/userRouter.js";
 import expensesRouter from "./src/routers/expensesRouter.js";
 app.use("/api/v1/users", userRouter);
