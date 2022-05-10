@@ -13,7 +13,7 @@ export const MainLayout = ({ children }) => {
       </div>
 
       {/* footer */}
-      <footer className="footer bg-dark text-light p-5 text-center">
+      <footer className="footer bg-dark text-light py-5 mb-0 text-center">
         &copy; right all right reserved. Build with 💝 by me
       </footer>
     </div>

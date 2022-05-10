@@ -7,12 +7,13 @@
   align-items: center;
 }
 .login-comp {
-  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .login-comp form {
+  width: 400px;
   background: rgba(118, 113, 113, 0.381);
   border-radius: 5px;
+  padding: 1rem;
 }
