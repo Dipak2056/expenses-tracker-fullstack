@@ -17,3 +17,7 @@
   border-radius: 5px;
   padding: 1rem;
 }
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+}
