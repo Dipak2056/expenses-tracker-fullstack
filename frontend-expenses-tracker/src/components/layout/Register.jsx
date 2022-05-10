@@ -10,8 +10,8 @@ const initialState = {
 };
 export const Register = () => {
   const [formDt, setFormDt] = useState(initialState);
-  const [isLoading, setIsLoading] = useState(true);
-  const [res, setRes] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [res, setRes] = useState({});
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
