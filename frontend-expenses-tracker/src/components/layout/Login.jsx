@@ -24,7 +24,7 @@ export const Login = () => {
     if (data.status === "success") {
       //if login success, store user dataa in session storage
       const { name, email, _id } = data.user;
-      sessionStorage.setItem("user", JSON.stringify(data.user));
+      sessionStorage.setItem("user", JSON.stringify({ name, email, _id }));
     }
 
     //else show the error message
@@ -34,6 +34,7 @@ export const Login = () => {
     <Row className="login-comp mt-5">
       <Form>
         <h3>Welcome back</h3>
+        {loading && <Spinner animation="border" variant="primary"></Spinner>}
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control ref={emailref} type="email" placeholder="Enter email" />
