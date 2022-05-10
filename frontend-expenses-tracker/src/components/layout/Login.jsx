@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Row, Button, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postLogin } from "../../helpers/axiosHelper";
 
 export const Login = () => {
@@ -9,6 +9,7 @@ export const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
   const handleOnSubmit = async () => {
     const email = emailref.current.value;
     const password = passwordref.current.value;
@@ -22,9 +23,10 @@ export const Login = () => {
     console.log(data);
 
     if (data.status === "success") {
-      //if login success, store user dataa in session storage
       const { name, email, _id } = data.user;
+      //if login success, store user data in session storage
       sessionStorage.setItem("user", JSON.stringify({ name, email, _id }));
+      navigate("/dashboard");
     }
 
     //else show the error message
