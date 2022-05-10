@@ -20,6 +20,23 @@ Content-Type: application/json
 
 {
     "email":"joh@gmail.com",
-    "password":"123456"
+    "password":"123456",
 }
 
+#==expenses tracker==#
+###get expenses
+GET http://localhost:8000/api/v1/expenses
+
+###get expenses
+POST http://localhost:8000/api/v1/expenses
+Content-Type: application/json
+Authorization: 6278a52757320f0b11369708
+
+{
+    "name":"food and play",
+    "amount":70,
+    "date":"2020-12-15"
+}
+
+###get expenses
+DELETE  Get http://localhost:8000/api/v1/expenses
