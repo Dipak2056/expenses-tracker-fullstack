@@ -26,13 +26,13 @@ router.post("/", async (req, res) => {
           message: "user registered unsuccessfull",
         });
   } catch (error) {
-    let message = error.message;
+    let { message } = error.message;
     if (error.message.includes("duplicate key error collection")) {
       message = "User already exist with same email";
     }
     res.json({
       status: "error",
-      message: error.message,
+      message,
     });
   }
 });
