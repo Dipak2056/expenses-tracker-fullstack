@@ -6,11 +6,11 @@ const initialState = {
   amount: " ",
   date: "",
 };
-export const ExpensesForm = () => {
+export const ExpensesForm = ({ handleOnPost }) => {
   const [frmData, setFrmData] = useState(initialState);
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(frmData);
+    handleOnPost(frmData);
   };
   const handleOnChange = (e) => {
     const { name, value } = e.target;
