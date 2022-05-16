@@ -14,11 +14,14 @@ app.use(morgan("tiny"));
 import { dbConnection } from "./src/config/db.js";
 dbConnection();
 
+//middlewares
+import { userAuth } from "./src/middlewares/authMiddleware.js";
+
 //apis end points
 import userRouter from "./src/routers/userRouter.js";
 import expensesRouter from "./src/routers/expensesRouter.js";
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/expenses", expensesRouter);
+app.use("/api/v1/expenses", userAuth, expensesRouter);
 
 //if no calls are made
 app.get("*", (req, res) => {

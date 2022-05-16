@@ -33,7 +33,7 @@ export const postLogin = (formDt) => {
 export const postExpenses = async (formData) => {
   try {
     const user = JSON.parse(sessionStorage.getItem("user"));
-    return axios.post(expAPI, formData, {
+    const { data } = await axios.post(expAPI, formData, {
       headers: {
         Authorization: user._id,
       },

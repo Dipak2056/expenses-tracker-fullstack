@@ -9,8 +9,8 @@ import { postExpenses } from "../helpers/axiosHelper";
 export const Dashboard = () => {
   const navigate = useNavigate();
   const [resp, setResp] = useState({
-    status: "asdf",
-    message: "asdff",
+    status: "",
+    message: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -19,6 +19,7 @@ export const Dashboard = () => {
       navigate("/");
     }
   }, [navigate]);
+
   const handleOnPost = async (frmData) => {
     console.log("submit", frmData);
     setIsLoading(true);
@@ -33,7 +34,7 @@ export const Dashboard = () => {
       <hr />
       <Row></Row>
       <Col>{isLoading && <Spinner variant="primary" animation="border" />}</Col>
-      <Col mt-5>
+      <Col>
         {resp?.message && (
           <Alert variant={resp.status === "success" ? "success" : "danger"}>
             {resp?.message}

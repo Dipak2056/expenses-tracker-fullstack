@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
 //delete
 router.delete("/", (req, res) => {
   res.json({
-    message: "welcome to expenses API",
+    message: "welcome to expenses API ",
   });
 });
 
