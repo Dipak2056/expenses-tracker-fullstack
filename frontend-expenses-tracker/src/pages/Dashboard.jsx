@@ -24,28 +24,23 @@ export const Dashboard = () => {
 
   const fetchExpenses = async () => {
     const data = await getExpense();
-    console.log(data);
     data?.status === "success" && setExpenses(data.expenses);
   };
 
   const handleOnPost = async (frmData) => {
-    console.log("submit", frmData);
     setIsLoading(true);
     const data = await postExpense(frmData);
     setIsLoading(false);
     setResp(data);
-    data.status === "succes" && fetchExpenses();
+    data.status === "success" && fetchExpenses();
   };
   const handleOnDelete = async (_id) => {
     if (!window.confirm("Are you sure you want to delete this expense?"))
       return;
     const data = await deleteExpense(_id);
+    setResp(data);
     data.status === "success" && fetchExpenses();
-
-    console.log(data);
   };
-
-  console.log(expenses);
 
   return (
     <MainLayout>
@@ -57,7 +52,7 @@ export const Dashboard = () => {
         </Col>
         <Col>
           {resp?.message && (
-            <Alert variant={resp.status === "succes" ? "success" : "danger"}>
+            <Alert variant={resp.status === "success" ? "success" : "danger"}>
               {resp?.message}
             </Alert>
           )}

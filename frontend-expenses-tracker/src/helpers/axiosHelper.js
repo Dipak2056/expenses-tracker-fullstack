@@ -52,7 +52,6 @@ export const postExpense = async (formData) => {
   }
 };
 export const getExpense = async () => {
-  console.log(sessionStorage.getItem("user"));
   try {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const { data } = await axios.get(expAPI, {
@@ -73,7 +72,6 @@ export const getExpense = async () => {
 };
 
 export const deleteExpense = async (_id) => {
-  console.log(sessionStorage.getItem("user"));
   try {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const { data } = await axios.delete(expAPI + "/" + _id, {

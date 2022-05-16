@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
     const result = await createExpense({ ...req.body, userId: authorization });
     result?._id
       ? res.json({
-          status: "succes",
+          status: "success",
           message: "expense created succefully",
         })
       : res.json({
