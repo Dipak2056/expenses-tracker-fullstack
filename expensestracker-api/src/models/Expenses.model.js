@@ -10,6 +10,6 @@ export const getExpenses = (filter) => {
   return ExpensesSchema.find(filter);
 };
 //@filter must be an object that should at least contains the userID
-export const deleteExpenses = (filter) => {
+export const deleteExpense = (filter) => {
   return ExpensesSchema.findOneAndDelete(filter);
 };

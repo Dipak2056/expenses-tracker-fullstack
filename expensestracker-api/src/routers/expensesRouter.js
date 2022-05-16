@@ -1,5 +1,9 @@
 import express from "express";
-import { createExpense, getExpenses } from "../models/Expenses.model.js";
+import {
+  createExpense,
+  getExpenses,
+  deleteExpense,
+} from "../models/Expenses.model.js";
 const router = express.Router();
 
 //get
@@ -43,10 +47,31 @@ router.post("/", async (req, res) => {
   }
 });
 //delete
-router.delete("/", (req, res) => {
-  res.json({
-    message: "welcome to expenses API ",
-  });
+router.delete("/:_id", async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const { authorization } = req.headers;
+
+    const filter = { _id, userId: authorization };
+
+    const data = await deleteExpense(filter);
+    data?._id
+      ? res.json({
+          status: "success",
+          message: "successfully deleted",
+        })
+      : res.json({
+          status: "error",
+          message: "couldnot delete",
+        });
+
+    console.log(data);
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 });
 
 export default router;

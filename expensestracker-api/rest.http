@@ -28,7 +28,7 @@ Content-Type: application/json
 GET http://localhost:8000/api/v1/expenses
 Authorization: 6278a52757320f0b11369708
 
-###get expenses
+###post expenses
 POST http://localhost:8000/api/v1/expenses
 Content-Type: application/json
 Authorization: 6278a52757320f0b11369708
@@ -39,5 +39,7 @@ Authorization: 6278a52757320f0b11369708
     "date":"2020-12-15"
 }
 
-###get expenses
+###delete expenses
 DELETE  Get http://localhost:8000/api/v1/expenses
+Authorization: 6278a52757320f0b11369708
+
