@@ -26,6 +26,7 @@ Content-Type: application/json
 #==expenses tracker==#
 ###get expenses
 GET http://localhost:8000/api/v1/expenses
+Authorization: 6278a52757320f0b11369708
 
 ###get expenses
 POST http://localhost:8000/api/v1/expenses

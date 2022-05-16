@@ -1,9 +1,10 @@
 import { getUser } from "../models/User.model.js";
 
 export const userAuth = async (req, res, next) => {
+  console.log("got hit");
   //code
   try {
-    const { authorization } = req.header;
+    const { authorization } = req.headers;
     if (authorization) {
       //check in db
       const user = await getUser(authorization);
@@ -24,7 +25,7 @@ export const userAuth = async (req, res, next) => {
     console.log(error);
     res.status(500).json({
       status: "error",
-      message: "you are not authorize to acces this resources",
+      message: "you are not authorize to access this resources",
     });
   }
 };

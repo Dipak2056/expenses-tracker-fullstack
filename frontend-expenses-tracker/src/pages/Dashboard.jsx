@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { CustomTable } from "../components/customtable/CustomTable";
 import { ExpensesForm } from "../components/ExpensesForm";
 import { MainLayout } from "../components/layout/MainLayout";
-import { postExpenses } from "../helpers/axiosHelper";
+import { getExpense, postExpense } from "../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -20,10 +20,14 @@ export const Dashboard = () => {
     }
   }, [navigate]);
 
+  const fetchExpenses = async () => {
+    const data = await getExpense();
+  };
+
   const handleOnPost = async (frmData) => {
     console.log("submit", frmData);
     setIsLoading(true);
-    const data = await postExpenses(frmData);
+    const data = await postExpense(frmData);
     setIsLoading(false);
     setResp(data);
   };
@@ -32,15 +36,18 @@ export const Dashboard = () => {
     <MainLayout>
       <h1>Dashboard</h1>
       <hr />
-      <Row></Row>
-      <Col>{isLoading && <Spinner variant="primary" animation="border" />}</Col>
-      <Col>
-        {resp?.message && (
-          <Alert variant={resp.status === "success" ? "success" : "danger"}>
-            {resp?.message}
-          </Alert>
-        )}
-      </Col>
+      <Row>
+        <Col>
+          {isLoading && <Spinner variant="primary" animation="border" />}
+        </Col>
+        <Col>
+          {resp?.message && (
+            <Alert variant={resp.status === "success" ? "success" : "danger"}>
+              {resp?.message}
+            </Alert>
+          )}
+        </Col>
+      </Row>
 
       <ExpensesForm handleOnPost={handleOnPost} />
       <CustomTable />

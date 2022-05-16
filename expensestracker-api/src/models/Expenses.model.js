@@ -6,10 +6,10 @@ export const createExpense = (expense) => {
   return ExpensesSchema.create(expense);
 };
 //@filter must be an object that should at least contains the userID
-const getExpenses = (filter) => {
+export const getExpenses = (filter) => {
   return ExpensesSchema.find(filter);
 };
 //@filter must be an object that should at least contains the userID
-const deleteExpenses = (filter) => {
+export const deleteExpenses = (filter) => {
   return ExpensesSchema.findOneAndDelete(filter);
 };
