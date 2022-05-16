@@ -52,7 +52,7 @@ export const postExpense = async (formData) => {
   }
 };
 export const getExpense = async () => {
-  console.log("here", sessionStorage.getItem("user"));
+  console.log(sessionStorage.getItem("user"));
   try {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const { data } = await axios.get(expAPI, {

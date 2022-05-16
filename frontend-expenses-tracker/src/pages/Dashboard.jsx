@@ -12,16 +12,20 @@ export const Dashboard = () => {
     status: "",
     message: "",
   });
+  const [expenses, setExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user?._id) {
       navigate("/");
     }
+    !expenses.length && fetchExpenses();
   }, [navigate]);
 
   const fetchExpenses = async () => {
     const data = await getExpense();
+    console.log(data);
+    data?.status === "success" && setExpenses(data.expenses);
   };
 
   const handleOnPost = async (frmData) => {
@@ -30,7 +34,9 @@ export const Dashboard = () => {
     const data = await postExpense(frmData);
     setIsLoading(false);
     setResp(data);
+    data?.status === "success" && fetchExpenses();
   };
+  console.log(expenses);
 
   return (
     <MainLayout>
@@ -50,7 +56,7 @@ export const Dashboard = () => {
       </Row>
 
       <ExpensesForm handleOnPost={handleOnPost} />
-      <CustomTable />
+      <CustomTable expenses={expenses} />
     </MainLayout>
   );
 };

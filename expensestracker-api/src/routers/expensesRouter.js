@@ -24,7 +24,6 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { authorization } = req.headers;
-    console.log(authorization, "slkjflsdjfl");
     const result = await createExpense({ ...req.body, userId: authorization });
     result?._id
       ? res.json({

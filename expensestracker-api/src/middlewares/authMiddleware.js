@@ -1,7 +1,6 @@
 import { getUser } from "../models/User.model.js";
 
 export const userAuth = async (req, res, next) => {
-  console.log("got hit");
   //code
   try {
     const { authorization } = req.headers;
