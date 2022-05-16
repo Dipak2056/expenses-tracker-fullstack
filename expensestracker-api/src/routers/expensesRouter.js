@@ -24,6 +24,10 @@ router.post("/", async (req, res) => {
         });
   } catch (error) {
     console.log(error.msg);
+    res.json({
+      status: "error",
+      message: "there is some error",
+    });
   }
 });
 //delete
