@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Row, Button, Spinner, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { postRegister } from "../../helpers/axiosHelper";
+
 import { useDispatch, useSelector } from "react-redux";
 import { isLoadingpending, setResponse } from "./userSlice";
 
@@ -13,9 +14,10 @@ const initialState = {
 export const Register = () => {
   const dispatch = useDispatch();
   const [formDt, setFormDt] = useState(initialState);
-  const [isLoading, setIsLoading] = useState(false);
-  const [res, setRes] = useState({});
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [res, setRes] = useState({});
 
+  const { res, isLoading } = useSelector((state) => state.user);
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormDt({

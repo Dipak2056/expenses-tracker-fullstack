@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  resp: {
+  res: {
     status: "",
     message: "",
   },
@@ -18,11 +18,11 @@ const userSlice = createSlice({
     },
     setResponse: (state, action) => {
       state.isLoading = false;
-      state.resp = action.payload;
+      state.res = action.payload;
     },
   },
 });
-const { actions, reducers } = userSlice;
+const { actions, reducer } = userSlice;
 
 export const { isLoadingpending, setResponse } = actions;
-export default reducers;
+export default reducer;
