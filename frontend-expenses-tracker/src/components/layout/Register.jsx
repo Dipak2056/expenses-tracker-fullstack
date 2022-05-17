@@ -35,7 +35,6 @@ export const Register = () => {
     // setRes(data);
     dispatch(setResponse(data));
     // setIsLoading(false);
-    dispatch(isLoadingpending(false));
 
     console.log(data);
   };
