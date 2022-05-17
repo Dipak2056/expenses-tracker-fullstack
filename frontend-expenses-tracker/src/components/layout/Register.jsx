@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Form, Row, Button, Spinner, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { postRegister } from "../../helpers/axiosHelper";
+import { useDispatch, useSelector } from "react-redux";
+import { isLoadingpending, setResponse } from "./userSlice";
 
 const initialState = {
   name: "",
@@ -9,6 +11,7 @@ const initialState = {
   password: "",
 };
 export const Register = () => {
+  const dispatch = useDispatch();
   const [formDt, setFormDt] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [res, setRes] = useState({});
@@ -22,12 +25,16 @@ export const Register = () => {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    // setIsLoading(true);
+    dispatch(isLoadingpending());
 
     //call api using axios
     const { data } = await postRegister(formDt);
-    setRes(data);
-    setIsLoading(false);
+    // setRes(data);
+    dispatch(setResponse(data));
+    // setIsLoading(false);
+    dispatch(isLoadingpending(false));
+
     console.log(data);
   };
   return (
