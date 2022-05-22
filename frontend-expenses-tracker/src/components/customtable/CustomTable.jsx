@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { fetchExpenses } from "../../pages/dashboard/dashboardAction";
 
-export const CustomTable = ({ expenses, handleOnDelete }) => {
+export const CustomTable = ({ handleOnDelete }) => {
+  const { expenses } = useSelector((state) => state.dashboard);
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
   return (
     <div className="mt-5 mb-3 custom-list fs-3">
       <ListGroup>

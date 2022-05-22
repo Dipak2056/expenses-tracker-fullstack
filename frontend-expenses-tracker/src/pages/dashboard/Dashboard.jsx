@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Spinner, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { CustomTable } from "../components/customtable/CustomTable";
-import { ExpensesForm } from "../components/ExpensesForm";
-import { MainLayout } from "../components/layout/MainLayout";
-import { getExpense, postExpense, deleteExpense } from "../helpers/axiosHelper";
+import { CustomTable } from "../../components/customtable/CustomTable";
+import { ExpensesForm } from "../../components/ExpensesForm";
+import { MainLayout } from "../../components/layout/MainLayout";
+import {
+  getExpense,
+  postExpense,
+  deleteExpense,
+} from "../../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -12,34 +16,29 @@ export const Dashboard = () => {
     status: "",
     message: "",
   });
-  const [expenses, setExpenses] = useState([]);
+  // const [expenses, setExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user?._id) {
       navigate("/");
     }
-    !expenses.length && fetchExpenses();
+    // !expenses.length && fetchExpenses();
   }, [navigate]);
-
-  const fetchExpenses = async () => {
-    const data = await getExpense();
-    data?.status === "success" && setExpenses(data.expenses);
-  };
 
   const handleOnPost = async (frmData) => {
     setIsLoading(true);
     const data = await postExpense(frmData);
     setIsLoading(false);
     setResp(data);
-    data.status === "success" && fetchExpenses();
+    // data.status === "success" && fetchExpenses();
   };
   const handleOnDelete = async (_id) => {
     if (!window.confirm("Are you sure you want to delete this expense?"))
       return;
     const data = await deleteExpense(_id);
     setResp(data);
-    data.status === "success" && fetchExpenses();
+    // data.status === "success" && fetchExpenses();
   };
 
   return (
@@ -60,7 +59,7 @@ export const Dashboard = () => {
       </Row>
 
       <ExpensesForm handleOnPost={handleOnPost} />
-      <CustomTable expenses={expenses} handleOnDelete={handleOnDelete} />
+      <CustomTable handleOnDelete={handleOnDelete} />
     </MainLayout>
   );
 };
