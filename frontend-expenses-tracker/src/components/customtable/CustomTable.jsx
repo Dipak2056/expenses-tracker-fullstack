@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Alert, ListGroup, Spinner } from "react-bootstrap";
+import { Alert, FormCheck, ListGroup, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchExpenses,
@@ -31,7 +31,11 @@ export const CustomTable = () => {
       <ListGroup>
         {expenses.map((item, i) => (
           <ListGroup.Item key={i}>
-            <span className="title">{item.name}</span>
+            <span className="check-group">
+              <FormCheck type="checkbox" className="mr-2" />
+              <span className="title">{item.name}</span>
+            </span>
+
             <span className="cost">${item.amount}</span>
             <button onClick={() => handleOnDelete(item._id)}>🚮</button>
           </ListGroup.Item>
