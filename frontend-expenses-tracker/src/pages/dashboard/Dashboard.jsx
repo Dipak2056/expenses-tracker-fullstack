@@ -26,13 +26,6 @@ export const Dashboard = () => {
     // !expenses.length && fetchExpenses();
   }, [navigate]);
 
-  const handleOnPost = async (frmData) => {
-    setIsLoading(true);
-    const data = await postExpense(frmData);
-    setIsLoading(false);
-    setResp(data);
-    // data.status === "success" && fetchExpenses();
-  };
   const handleOnDelete = async (_id) => {
     if (!window.confirm("Are you sure you want to delete this expense?"))
       return;
@@ -58,7 +51,7 @@ export const Dashboard = () => {
         </Col>
       </Row>
 
-      <ExpensesForm handleOnPost={handleOnPost} />
+      <ExpensesForm />
       <CustomTable handleOnDelete={handleOnDelete} />
     </MainLayout>
   );

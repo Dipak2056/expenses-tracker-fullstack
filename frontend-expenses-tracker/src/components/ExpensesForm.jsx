@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Row, Col, Form, FormControl, Button } from "react-bootstrap";
 
+import { handleOnPost } from "../../src/pages/dashboard/dashboardAction";
 const initialState = {
   name: "",
   amount: " ",
   date: "",
 };
-export const ExpensesForm = ({ handleOnPost }) => {
+export const ExpensesForm = () => {
+  const dispatch = useDispatch();
+
   const [frmData, setFrmData] = useState(initialState);
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    handleOnPost(frmData);
+    dispatch(handleOnPost(frmData));
   };
   const handleOnChange = (e) => {
     const { name, value } = e.target;
