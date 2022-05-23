@@ -3,6 +3,7 @@ import {
   createExpense,
   getExpenses,
   deleteExpense,
+  deleteManyExpenses,
 } from "../models/Expenses.model.js";
 const router = express.Router();
 
@@ -47,15 +48,14 @@ router.post("/", async (req, res) => {
   }
 });
 //delete
-router.delete("/:_id", async (req, res) => {
+router.delete("/", async (req, res) => {
   try {
-    const { _id } = req.params;
+    const ids = req.body;
+
     const { authorization } = req.headers;
 
-    const filter = { _id, userId: authorization };
-
-    const data = await deleteExpense(filter);
-    data?._id
+    const data = await deleteManyExpenses(authorization, ids);
+    data?.deletedCount
       ? res.json({
           status: "success",
           message: "successfully deleted",

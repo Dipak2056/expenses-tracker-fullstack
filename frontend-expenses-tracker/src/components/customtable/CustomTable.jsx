@@ -50,13 +50,13 @@ export const CustomTable = () => {
             </span>
 
             <span className="cost">${item.amount}</span>
-            <button onClick={() => handleOnDelete(item._id)}>🚮</button>
+            <button onClick={() => handleOnDelete([item._id])}>🚮</button>
           </ListGroup.Item>
         ))}
       </ListGroup>
       <div className="mt-2 text-end">
         {ids.length > 0 && (
-          <Button variant="danger" onClick={() => handleOnDelete}>
+          <Button variant="danger" onClick={() => handleOnDelete(ids)}>
             Delete selected Expenses
           </Button>
         )}
