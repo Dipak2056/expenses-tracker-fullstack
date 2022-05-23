@@ -5,9 +5,15 @@ import {
   fetchExpenses,
   handleOnDeleteExpenses,
 } from "../../pages/dashboard/dashboardAction";
+import { setExpenses } from "../../pages/dashboard/dashboardSlice";
 
 export const CustomTable = () => {
   const { expenses, isLoading, res } = useSelector((state) => state.dashboard);
+
+  const [all, setAll] = useState([]);
+  const [income, setIncome] = useState([]);
+  const [onlyExpense, setOnlyExpense] = useState([]);
+
   const [ids, setIds] = useState([]);
   const dispatch = useDispatch();
 
@@ -27,6 +33,24 @@ export const CustomTable = () => {
       ? setIds([...ids, value])
       : setIds(ids.filter((id) => id !== value));
   };
+  const handleAll = () => {
+    const allitem = expenses;
+    setAll(allitem);
+    setIncome([]);
+    setOnlyExpense([]);
+  };
+  const handleOnSelectIncome = () => {
+    const onlyincome = expenses.filter((item) => item.type === "income");
+    setIncome(onlyincome);
+    setOnlyExpense([]);
+    setAll([]);
+  };
+  const handleOnSelectExpenses = () => {
+    const onlyexpense = expenses.filter((item) => item.type !== "income");
+    setOnlyExpense(onlyexpense);
+    setIncome([]);
+    setAll([]);
+  };
 
   return (
     <div className="mt-5 mb-3 custom-list fs-3">
@@ -36,26 +60,83 @@ export const CustomTable = () => {
           {res.message}
         </Alert>
       )}
-      <ListGroup>
-        {expenses.map((item, i) => (
-          <ListGroup.Item key={item._id}>
-            <span className="check-group">
-              <FormCheck
-                type="checkbox"
-                className="mr-2"
-                onClick={handleOnSelect}
-                value={item._id}
-              />
-              <span className="title">{item.name}</span>
-            </span>
+      <Button variant="primary" onClick={handleAll}>
+        Display All Income
+      </Button>
+      <Button variant="primary" onClick={handleOnSelectIncome}>
+        Display only Income
+      </Button>
+      <Button variant="danger" onClick={handleOnSelectExpenses}>
+        Display only Expenses
+      </Button>
+      {all && (
+        <ListGroup>
+          {all.map((item, i) => (
+            <ListGroup.Item key={item._id}>
+              <span className="check-group">
+                <FormCheck
+                  type="checkbox"
+                  className="mr-2"
+                  onClick={handleOnSelect}
+                  value={item._id}
+                />
+                <span className="title">{item.name}</span>
+              </span>
 
-            <span className="cost">
-              {item.type === "expenses" ? "-" : " "}${item.amount}
-            </span>
-            <button onClick={() => handleOnDelete([item._id])}>🚮</button>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+              <span className="cost">
+                {item.type === "expenses" ? "-" : " "}${item.amount}
+              </span>
+              <button onClick={() => handleOnDelete([item._id])}>🚮</button>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      )}
+
+      {income && (
+        <ListGroup>
+          {income.map((item, i) => (
+            <ListGroup.Item key={item._id}>
+              <span className="check-group">
+                <FormCheck
+                  type="checkbox"
+                  className="mr-2"
+                  onClick={handleOnSelect}
+                  value={item._id}
+                />
+                <span className="title">{item.name}</span>
+              </span>
+
+              <span className="cost">
+                {item.type === "expenses" ? "-" : " "}${item.amount}
+              </span>
+              <button onClick={() => handleOnDelete([item._id])}>🚮</button>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      )}
+      {onlyExpense && (
+        <ListGroup>
+          {onlyExpense.map((item, i) => (
+            <ListGroup.Item key={item._id}>
+              <span className="check-group">
+                <FormCheck
+                  type="checkbox"
+                  className="mr-2"
+                  onClick={handleOnSelect}
+                  value={item._id}
+                />
+                <span className="title">{item.name}</span>
+              </span>
+
+              <span className="cost">
+                {item.type === "expenses" ? "-" : " "}${item.amount}
+              </span>
+              <button onClick={() => handleOnDelete([item._id])}>🚮</button>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      )}
+
       <div className="mt-2 text-end">
         {ids.length > 0 && (
           <Button variant="danger" onClick={() => handleOnDelete(ids)}>

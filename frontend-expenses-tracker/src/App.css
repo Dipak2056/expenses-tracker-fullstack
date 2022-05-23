@@ -24,3 +24,6 @@
 .check-group {
   display: flex;
 }
+.red {
+  color: rgba(255, 0, 0, 0.235);
+}
