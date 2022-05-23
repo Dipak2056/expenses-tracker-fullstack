@@ -26,6 +26,6 @@ const dashboardSlice = createSlice({
 });
 const { reducer, actions } = dashboardSlice;
 
-export const { requestPending, setResponse } = actions;
+export const { requestPending, setResponse, setExpenses } = actions;
 
 export default reducer;
