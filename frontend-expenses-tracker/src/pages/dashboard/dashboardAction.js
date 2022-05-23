@@ -1,4 +1,8 @@
-import { getExpense, postExpense } from "../../helpers/axiosHelper";
+import {
+  deleteExpense,
+  getExpense,
+  postExpense,
+} from "../../helpers/axiosHelper";
 import { requestPending, setResponse, setExpenses } from "./dashboardSlice";
 
 export const fetchExpenses = () => async (dispatch) => {
@@ -18,4 +22,11 @@ export const handleOnPost = (frmData) => async (dispatch) => {
   dispatch(setResponse(data));
   data.status === "success" && dispatch(fetchExpenses());
   // data.status === "success" && fetchExpenses();
+};
+export const handleOnDeleteExpenses = (ids) => async (dispatch) => {
+  dispatch(requestPending());
+  const data = await deleteExpense(ids);
+
+  dispatch(setResponse(data));
+  data.status === "success" && dispatch(fetchExpenses());
 };
