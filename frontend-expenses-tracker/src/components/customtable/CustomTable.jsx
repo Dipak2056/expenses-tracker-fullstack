@@ -13,7 +13,8 @@ export const CustomTable = () => {
 
   useEffect(() => {
     dispatch(fetchExpenses());
-  }, []);
+    res.status === "success" && setIds([]);
+  }, [res]);
 
   const handleOnDelete = async (ids) => {
     if (!window.confirm("Are you sure you want to delete this expense?"))
@@ -26,7 +27,6 @@ export const CustomTable = () => {
       ? setIds([...ids, value])
       : setIds(ids.filter((id) => id !== value));
   };
-  console.log(ids);
 
   return (
     <div className="mt-5 mb-3 custom-list fs-3">
@@ -38,7 +38,7 @@ export const CustomTable = () => {
       )}
       <ListGroup>
         {expenses.map((item, i) => (
-          <ListGroup.Item key={i}>
+          <ListGroup.Item key={item._id}>
             <span className="check-group">
               <FormCheck
                 type="checkbox"
@@ -49,7 +49,9 @@ export const CustomTable = () => {
               <span className="title">{item.name}</span>
             </span>
 
-            <span className="cost">${item.amount}</span>
+            <span className="cost">
+              {item.type === "expenses" ? "-" : " "}${item.amount}
+            </span>
             <button onClick={() => handleOnDelete([item._id])}>🚮</button>
           </ListGroup.Item>
         ))}
@@ -57,7 +59,7 @@ export const CustomTable = () => {
       <div className="mt-2 text-end">
         {ids.length > 0 && (
           <Button variant="danger" onClick={() => handleOnDelete(ids)}>
-            Delete selected Expenses
+            Delete All selected Expenses
           </Button>
         )}
       </div>

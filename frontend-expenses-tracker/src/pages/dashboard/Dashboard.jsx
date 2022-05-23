@@ -4,11 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { CustomTable } from "../../components/customtable/CustomTable";
 import { ExpensesForm } from "../../components/ExpensesForm";
 import { MainLayout } from "../../components/layout/MainLayout";
-import {
-  getExpense,
-  postExpense,
-  deleteExpense,
-} from "../../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();

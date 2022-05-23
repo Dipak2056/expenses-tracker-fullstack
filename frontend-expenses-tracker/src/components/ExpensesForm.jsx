@@ -27,6 +27,18 @@ export const ExpensesForm = () => {
   return (
     <Form onSubmit={handleOnSubmit}>
       <Row className="g-3 bg-dark p-4">
+        <Col md="2">
+          <Form.Select
+            required
+            aria-label="Default select example"
+            onChange={handleOnChange}
+            name="type"
+          >
+            <option>Select one</option>
+            <option value="income">Income</option>
+            <option value="expenses">Expenses</option>
+          </Form.Select>
+        </Col>
         <Col md="4">
           <FormControl
             type="text"
