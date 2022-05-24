@@ -9,6 +9,7 @@ import morgan from "morgan"; //to find where the data is flowing
 app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
+app.use(helmet());
 
 //db connection imported from db.js
 import { dbConnection } from "./src/config/db.js";
